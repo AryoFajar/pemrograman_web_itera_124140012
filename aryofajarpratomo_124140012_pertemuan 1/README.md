@@ -7,7 +7,7 @@
 | **Nama Lengkap** | Aryo Fajar Pratomo |
 | **NIM** | 124140012 |
 | **Kelas Praktikum** | RA |
-| **Mata Kuliah** | Pemrograman Web – Teknik Informatika, Institut Teknologi Sumatera |
+| **Mata Kuliah** | Pengembangan Aplikasi Web |
 
 ## Deskripsi Aplikasi
 

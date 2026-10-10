@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini POS – Kasir Kantin Kampus</title>
+  <meta name="description" content="Aplikasi kasir dan keranjang belanja sederhana untuk kantin atau toko kampus: validasi form, kalkulator diskon dan kembalian, serta penyimpanan keranjang di localStorage.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#nama">Lewati ke form input barang</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">Rp</span>
+        <div>
+          <h1>Mini POS</h1>
+          <p>Kasir Kantin &amp; Toko Kampus</p>
+        </div>
+      </div>
+      <p class="topbar-note">Keranjang tersimpan otomatis di browser</p>
+    </div>
+  </header>
+
+  <main class="wrap layout">
+
+    <section class="card card-form" aria-labelledby="judul-form">
+      <h2 id="judul-form"><span class="step" aria-hidden="true">1</span>Tambah Barang</h2>
+
+      <form id="form-barang" novalidate autocomplete="off">
+        <div class="field">
+          <label for="nama">Nama Barang</label>
+          <input type="text" id="nama" name="nama" maxlength="60"
+                 placeholder="mis. Buku Tulis" aria-describedby="error-nama hint-nama">
+          <p class="hint" id="hint-nama">Wajib diisi, minimal 3 karakter.</p>
+          <p class="error" id="error-nama" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="harga">Harga Satuan (Rp)</label>
+          <input type="number" id="harga" name="harga" inputmode="numeric"
+                 min="500" step="1" placeholder="mis. 5000"
+                 aria-describedby="error-harga hint-harga">
+          <p class="hint" id="hint-harga">Angka bulat, minimal Rp 500.</p>
+          <p class="error" id="error-harga" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="qty">Jumlah (Qty)</label>
+          <input type="number" id="qty" name="qty" inputmode="numeric"
+                 min="1" step="1" placeholder="mis. 2"
+                 aria-describedby="error-qty hint-qty">
+          <p class="hint" id="hint-qty">Bilangan bulat, minimal 1.</p>
+          <p class="error" id="error-qty" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Tambah ke Keranjang</button>
+        <p class="status" id="status-form" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <div class="stack">
+
+      <section class="card" aria-labelledby="judul-keranjang">
+        <div class="card-head">
+          <h2 id="judul-keranjang"><span class="step" aria-hidden="true">2</span>Keranjang Belanja</h2>
+          <p class="badge" id="info-keranjang">0 item</p>
+        </div>
+
+        <div class="table-wrap">
+          <table class="cart" id="tabel-keranjang">
+            <caption class="sr-only">Daftar barang di keranjang belanja</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="col-no">No</th>
+                <th scope="col">Nama Barang</th>
+                <th scope="col" class="num">Harga Satuan</th>
+                <th scope="col" class="num">Qty</th>
+                <th scope="col" class="num">Subtotal</th>
+                <th scope="col" class="col-aksi">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="isi-keranjang"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="judul-bayar">
+        <div class="card-head">
+          <h2 id="judul-bayar"><span class="step" aria-hidden="true">3</span>Ringkasan &amp; Pembayaran</h2>
+        </div>
+
+        <div class="pay-grid">
+          <div class="receipt">
+            <dl class="sum">
+              <div class="sum-row">
+                <dt>Total Belanja</dt>
+                <dd id="total-belanja">Rp 0</dd>
+              </div>
+              <div class="sum-row sum-diskon">
+                <dt>Diskon <span class="sum-sub" id="info-diskon">Belum ada diskon</span></dt>
+                <dd id="nominal-diskon">− Rp 0</dd>
+              </div>
+            </dl>
+            <div class="grand">
+              <span>Total Akhir</span>
+              <strong id="total-akhir">Rp 0</strong>
+            </div>
+
+            <div class="promo">
+              <label for="kode-promo">Kode Promo <span class="optional">(opsional)</span></label>
+              <div class="promo-row">
+                <input type="text" id="kode-promo" placeholder="mis. HEMAT10"
+                       maxlength="20" autocapitalize="characters" aria-describedby="status-promo">
+                <button type="button" class="btn btn-ghost" id="btn-promo">Pakai</button>
+              </div>
+              <p class="status" id="status-promo" role="status" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <div class="payment">
+            <div class="field">
+              <label for="bayar">Uang Bayar (Rp)</label>
+              <input type="number" id="bayar" inputmode="numeric" min="0" step="1"
+                     placeholder="Nominal uang diterima" aria-describedby="hint-bayar">
+              <p class="hint" id="hint-bayar">Masukkan uang yang diterima dari pembeli.</p>
+              <div class="quick" id="quick-bayar" aria-label="Nominal cepat">
+                <button type="button" class="chip" data-nominal="pas">Uang pas</button>
+                <button type="button" class="chip" data-nominal="20000">20.000</button>
+                <button type="button" class="chip" data-nominal="50000">50.000</button>
+                <button type="button" class="chip" data-nominal="100000">100.000</button>
+              </div>
+            </div>
+
+            <div class="change is-idle" id="kotak-kembalian" aria-live="polite">
+              <span class="change-label" id="label-kembalian">Kembalian</span>
+              <strong class="change-value" id="nilai-kembalian">—</strong>
+              <span class="change-note" id="catatan-kembalian">Keranjang masih kosong.</span>
+            </div>
+
+            <button type="button" class="btn btn-danger btn-block" id="btn-reset">Transaksi Baru / Reset</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Mini POS · Tugas Praktikum Pemrograman Web · Aryo Fajar Pratomo (124140012)</p>
+  </footer>
+</body>
+</html>

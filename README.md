@@ -9,7 +9,6 @@
 
 ## Daftar Tugas
 
-| Pertemuan | Materi | Folder |
-|---|---|---|
+| Pertemuan | Materi |
+|---|---
 | 1 | JavaScript Dasar: Mini POS (validasi form, kalkulator, localStorage) dan latihan modul |
-

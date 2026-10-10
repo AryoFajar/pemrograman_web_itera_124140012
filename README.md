@@ -11,5 +11,5 @@
 
 | Pertemuan | Materi | Folder |
 |---|---|---|
-| 1 | JavaScript Dasar: Mini POS (validasi form, kalkulator, localStorage) dan latihan modul | [aryofajarpratomo_124140012_pertemuan1](./aryofajarpratomo_124140012_pertemuan1) |
+| 1 | JavaScript Dasar: Mini POS (validasi form, kalkulator, localStorage) dan latihan modul |
 

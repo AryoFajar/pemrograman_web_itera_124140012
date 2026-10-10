@@ -39,11 +39,16 @@ Dibuat dengan HTML, CSS, dan JavaScript murni (tanpa framework maupun library).
 
 ```
 aryofajarpratomo_124140012_pertemuan1/
-├── index.html      # Struktur HTML aplikasi
-├── style.css       # Styling antarmuka (responsif)
-├── script.js       # Logika JavaScript
-├── README.md       # Dokumentasi
-└── screenshots/    # Tangkapan layar untuk README
+├── index.html          # Struktur HTML aplikasi Mini POS
+├── style.css           # Styling antarmuka (responsif, tema gelap)
+├── script.js           # Logika JavaScript
+├── README.md           # Dokumentasi
+├── SS/                 # Tangkapan layar untuk README
+└── modul/              # File latihan selama praktikum
+    ├── 01_variabel_kondisional/
+    ├── 02_loop_fungsi/
+    ├── 03_array_objek/
+    └── 04_dom_api/
 ```
 
 ## Daftar Fitur

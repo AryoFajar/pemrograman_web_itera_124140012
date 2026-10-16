@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Dashboard Kuliah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+ 
+    <!-- ===== Header: sapaan, jam, tenggat terdekat ===== -->
+    <header class="top">
+      <div class="top__main">
+        <p class="top__date" id="tanggal"></p>
+        <h1 class="top__greet" id="sapaan">Halo</h1>
+        <blockquote class="quote" id="kutipan" aria-live="polite">
+          <p class="quote__text">Memuat kutipan hari ini…</p>
+        </blockquote>
+      </div>
+ 
+      <div class="top__side">
+        <div class="clock" id="jam" aria-label="Jam saat ini">--:--</div>
+        <button class="btn btn--ghost" id="btn-tema" type="button" aria-pressed="false">Mode gelap</button>
+      </div>
+ 
+      <aside class="next" id="tenggat-terdekat" aria-live="polite"></aside>
+    </header>
+ 
+    <main class="grid">
+ 
+      <!-- ===== Kolom kiri: daftar tugas ===== -->
+      <section class="panel panel--tugas" aria-labelledby="h-tugas">
+        <div class="panel__head">
+          <h2 id="h-tugas">Tugas kuliah</h2>
+          <div class="panel__actions">
+            <button class="btn btn--ghost" id="btn-impor" type="button">Impor contoh dari API</button>
+            <button class="btn btn--primary" id="btn-tambah-tugas" type="button">+ Tambah tugas</button>
+          </div>
+        </div>
+ 
+        <div class="stats" id="statistik"></div>
+ 
+        <div class="toolbar">
+          <div class="seg" role="group" aria-label="Filter tugas" id="filter-tugas">
+            <button type="button" class="seg__btn is-active" data-filter="semua">Semua</button>
+            <button type="button" class="seg__btn" data-filter="aktif">Belum selesai</button>
+            <button type="button" class="seg__btn" data-filter="selesai">Selesai</button>
+          </div>
+          <label class="search">
+            <span class="sr-only">Cari tugas</span>
+            <input type="search" id="cari" placeholder="Cari judul atau mata kuliah…" autocomplete="off">
+          </label>
+        </div>
+ 
+        <ul class="tasks" id="daftar-tugas"></ul>
+      </section>
+ 
+      <!-- ===== Kolom kanan: cuaca + jadwal ===== -->
+      <div class="side">
+        <section class="panel panel--cuaca" aria-labelledby="h-cuaca">
+          <h2 id="h-cuaca">Cuaca di kampus</h2>
+          <div id="cuaca" aria-live="polite"><p class="muted">Memuat cuaca…</p></div>
+        </section>
+ 
+        <section class="panel panel--jadwal" aria-labelledby="h-jadwal">
+          <div class="panel__head">
+            <h2 id="h-jadwal">Jadwal kuliah</h2>
+            <button class="btn btn--primary btn--sm" id="btn-tambah-jadwal" type="button">+ Tambah</button>
+          </div>
+          <div class="days" id="hari-jadwal" role="group" aria-label="Pilih hari"></div>
+          <ul class="sched" id="daftar-jadwal"></ul>
+        </section>
+      </div>
+    </main>
+ 
+    <footer class="foot">Data tersimpan di browser ini (localStorage). Cuaca dari Open-Meteo, kutipan dari DummyJSON.</footer>
+  </div>
+ 
+  <!-- ===== Dialog tugas ===== -->
+  <dialog id="dlg-tugas" aria-labelledby="dlg-tugas-judul">
+    <form id="form-tugas" method="dialog" novalidate>
+      <h3 id="dlg-tugas-judul">Tambah tugas</h3>
+      <input type="hidden" name="id">
+      <label class="field">Judul tugas
+        <input name="title" type="text" required maxlength="80" placeholder="Contoh: Laporan Praktikum VLAN">
+        <small class="err" data-err="title"></small>
+      </label>
+      <label class="field">Mata kuliah
+        <input name="course" type="text" required maxlength="40" placeholder="Contoh: Jaringan Komputer">
+        <small class="err" data-err="course"></small>
+      </label>
+      <div class="row">
+        <label class="field">Tenggat
+          <input name="deadline" type="date" required>
+          <small class="err" data-err="deadline"></small>
+        </label>
+        <label class="field">Prioritas
+          <select name="priority">
+            <option value="rendah">Rendah</option>
+            <option value="sedang" selected>Sedang</option>
+            <option value="tinggi">Tinggi</option>
+          </select>
+        </label>
+      </div>
+      <div class="dlg__actions">
+        <button type="button" class="btn btn--ghost" data-tutup>Batal</button>
+        <button type="submit" class="btn btn--primary">Simpan tugas</button>
+      </div>
+    </form>
+  </dialog>
+ 
+  <!-- ===== Dialog jadwal ===== -->
+  <dialog id="dlg-jadwal" aria-labelledby="dlg-jadwal-judul">
+    <form id="form-jadwal" method="dialog" novalidate>
+      <h3 id="dlg-jadwal-judul">Tambah jadwal</h3>
+      <input type="hidden" name="id">
+      <label class="field">Mata kuliah
+        <input name="course" type="text" required maxlength="40" placeholder="Contoh: Pemrograman Web">
+        <small class="err" data-err="course"></small>
+      </label>
+      <div class="row">
+        <label class="field">Hari
+          <select name="day">
+            <option value="1">Senin</option><option value="2">Selasa</option><option value="3">Rabu</option>
+            <option value="4">Kamis</option><option value="5">Jumat</option><option value="6">Sabtu</option>
+            <option value="0">Minggu</option>
+          </select>
+        </label>
+        <label class="field">Ruang
+          <input name="room" type="text" maxlength="20" placeholder="Contoh: GK1-201">
+        </label>
+      </div>
+      <div class="row">
+        <label class="field">Mulai
+          <input name="start" type="time" required value="08:00">
+          <small class="err" data-err="start"></small>
+        </label>
+        <label class="field">Selesai
+          <input name="end" type="time" required value="09:40">
+          <small class="err" data-err="end"></small>
+        </label>
+      </div>
+      <div class="dlg__actions">
+        <button type="button" class="btn btn--ghost" data-tutup>Batal</button>
+        <button type="submit" class="btn btn--primary">Simpan jadwal</button>
+      </div>
+    </form>
+  </dialog>
+ 
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+ 
+  <script src="script.js"></script>
+</body>
+</html>

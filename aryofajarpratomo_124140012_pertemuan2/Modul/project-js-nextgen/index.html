@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project JS Next Gen - Pertemuan 2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-100 text-slate-800">
+  <main class="max-w-3xl mx-auto p-4 md:p-8">
+    <header class="mb-6">
+      <h1 class="text-2xl md:text-3xl font-bold">JavaScript Next Gen (ES6+)</h1>
+      <p class="text-slate-600 mt-1">
+        Praktikum Pertemuan 2 &ndash; Aryo Fajar Pratomo (124140012).
+        Klik <strong>Run Demo</strong> untuk menjalankan 12 demo, atau <strong>Run Latihan</strong> untuk latihan mandiri.
+      </p>
+    </header>
+
+    <div class="flex flex-wrap gap-2 mb-6">
+      <button id="runBtn" class="btn btn-primary" type="button">Run Demo</button>
+      <button id="latihanBtn" class="btn btn-secondary" type="button">Run Latihan</button>
+      <button id="clearBtn" class="btn btn-ghost" type="button">Clear Output</button>
+    </div>
+
+    <section id="output" class="space-y-4" aria-live="polite">
+      <p class="text-slate-500 italic">Belum ada output. Klik tombol di atas.</p>
+    </section>
+  </main>
+
+  <!-- type="module" wajib agar import/export dapat dipakai di browser -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

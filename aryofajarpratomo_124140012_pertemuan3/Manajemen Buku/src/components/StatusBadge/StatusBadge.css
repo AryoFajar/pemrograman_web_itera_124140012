@@ -1,0 +1,23 @@
+.status-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.status-milik {
+  background: var(--milik-bg);
+  color: var(--milik);
+}
+
+.status-baca {
+  background: var(--baca-bg);
+  color: var(--baca);
+}
+
+.status-beli {
+  background: var(--beli-bg);
+  color: var(--beli);
+}

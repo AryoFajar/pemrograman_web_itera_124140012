@@ -1,0 +1,128 @@
+/* Variabel warna dan gaya dasar seluruh aplikasi */
+:root {
+  --primary: #4338ca;
+  --primary-dark: #1e1b4b;
+  --accent: #f59e0b;
+  --danger: #dc2626;
+  --bg: #f5f3ff;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text: #1f2937;
+  --text-muted: #64748b;
+  --shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+
+  --milik: #047857;
+  --milik-bg: #d1fae5;
+  --baca: #1d4ed8;
+  --baca-bg: #dbeafe;
+  --beli: #b45309;
+  --beli-bg: #fef3c7;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2.5rem;
+}
+
+.page-header {
+  margin-bottom: 1.25rem;
+}
+
+.page-header h1 {
+  font-size: 1.6rem;
+  color: var(--primary-dark);
+}
+
+.page-header p {
+  color: var(--text-muted);
+}
+
+.app-footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Tombol yang dipakai bersama */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #3730a3;
+}
+
+.btn-ghost {
+  background: #f1f5f9;
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  background: #e2e8f0;
+}
+
+.btn-small {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.btn-edit {
+  background: #eef2ff;
+  color: var(--primary);
+}
+
+.btn-edit:hover {
+  background: #e0e7ff;
+}
+
+.btn-danger {
+  background: #fee2e2;
+  color: var(--danger);
+}
+
+.btn-danger:hover {
+  background: #fecaca;
+}

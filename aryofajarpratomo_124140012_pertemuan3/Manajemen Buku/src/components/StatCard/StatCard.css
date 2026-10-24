@@ -1,0 +1,49 @@
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--primary);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  box-shadow: var(--shadow);
+}
+
+.stat-card.stat-milik { border-top-color: var(--milik); }
+.stat-card.stat-baca { border-top-color: var(--baca); }
+.stat-card.stat-beli { border-top-color: var(--beli); }
+
+.stat-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.stat-bar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--primary);
+  transition: width 0.4s ease;
+}
+
+.stat-milik .stat-bar-fill { background: var(--milik); }
+.stat-baca .stat-bar-fill { background: var(--baca); }
+.stat-beli .stat-bar-fill { background: var(--beli); }
+
+.stat-percent {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}

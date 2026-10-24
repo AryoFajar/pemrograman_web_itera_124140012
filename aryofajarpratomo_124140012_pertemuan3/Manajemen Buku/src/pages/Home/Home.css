@@ -1,0 +1,43 @@
+.home-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.home-form {
+  position: sticky;
+  top: 76px;
+}
+
+.result-info {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.notice {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  font-weight: 600;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  animation: muncul 0.2s ease;
+}
+
+@keyframes muncul {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 800px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .home-form {
+    position: static;
+  }
+}

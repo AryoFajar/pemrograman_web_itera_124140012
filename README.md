@@ -13,4 +13,4 @@
 |---|---
 | 1 | JavaScript Dasar: Mini POS (validasi form, kalkulator, localStorage) dan latihan modul |
 | 2 | Mengenal fitur modern JavaScript (ES6+) dan penerapannya dalam pengembangan web dan latihan modul |
-
+| 3 | React Basics  : Membuat Manajemen Buku |
